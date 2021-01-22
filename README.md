@@ -5,7 +5,7 @@
 #include <knowledge>
 #include <some/lucky>
 
-using namespace ByRedoC; <a name="#marker" id="marker"></a>
+using namespace ByRedoC;
 
 int main() {
     # You can see my codes but are not allowed to copy them.
