@@ -1,29 +1,25 @@
 #include <iostream>
-#define MAX 11
-
+#include <vector>
+#include <algorithm>
+#include <numeric>
+#include <functional>
+typedef long long ll;
 using namespace std;
 
-int mem[MAX] = {1, 2, 4, 0, };
-
-int getCount(int n) {
-    if (mem[n - 1] > 0) return mem[n - 1];
-    
-    int ret = 0;
-    for (int i = 1; i < n; i++) {
-        ret += getCount(n - i);
-    }
-
-    mem[n - 1] = ret;
-    return mem[n - 1];
-}
-
 int main() {
+    ios::sync_with_stdio(false);
     int T; cin >> T;
+    while(T--) {
+        ll dp[11];
+        int n; cin >> n;
 
-    for (int i = 0; i < T; i++) {
-        int N; cin >> N;
-        cout << getCount(N) << endl;
+        dp[1] = 1;
+        dp[2] = 2;
+        dp[3] = 4;
+        for (int i = 4; i <= n; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3];
+        }
+        cout << dp[n] << endl;
     }
-
     return 0;
 }
