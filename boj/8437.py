@@ -1,4 +1,6 @@
-a = int(input())
-b = int(input())
-print(int((a-b)/2))
-print(int((a+b)/2))
+total = int(input())
+d = int(input())
+Natalia = total//2 - d//2
+Klaudia = total - Natalia
+print(Klaudia)
+print(Natalia)
