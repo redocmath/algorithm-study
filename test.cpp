@@ -1,3 +1,4 @@
+#include <cctype>
 #include <cstring>
 #include <iostream>
 #include <string>
@@ -12,7 +13,5 @@ int dp[1000];
 
 int main() {
     ios::sync_with_stdio(false);
-    
-    cout << 380 % 500;
     return 0;
 }
