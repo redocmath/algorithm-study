@@ -1,21 +1,26 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <numeric>
-#include <string>
-#include <cmath>
-#include <functional>
-
-using namespace std;
+#include <bits/stdc++.h>
 typedef long long ll;
+using namespace std;
 
 int main() {
     ios::sync_with_stdio(false);
-    cin.tie(nullptr); cout.tie(nullptr);
     string a; cin >> a;
-    int ret = 0, inbrace; string mem;
-    for (int i = 0; i < a.length(); i++) {
-        if (isdigit(a[i])) mem += a[i];
-        else if (a[i] == "+") inbrace 
+
+    int ret = 0, mode = 1; string tmp = ""; bool isToggled = false;
+    for (char e: a) {
+        if (isdigit(e)) tmp += e;
+        else if (e == '+' && !isToggled) {
+            ret += mode * stoi(tmp);
+            mode = 1;
+            tmp = "";
+        } else {
+            if (!isToggled) isToggled = true;
+            ret += mode * stoi(tmp);
+            mode = -1;
+            tmp = "";
+        }
     }
+    ret += mode * stoi(tmp);
+    cout << ret;
+    return 0;
 }
