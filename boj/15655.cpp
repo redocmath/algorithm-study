@@ -8,7 +8,7 @@ int a[8];
 int cache[8];
 bool vis[8];
 
-void solve(int k) {
+void solve(int k, int last) {
     if (k == m) {
         for (int i = 0; i < m; i++) cout << cache[i] << " ";
         cout << "\n";
@@ -16,10 +16,10 @@ void solve(int k) {
     }
 
     for (int i = 0; i < n; i++) {
-        if (!vis[i]) {
+        if (!vis[i] && a[i] > last) {
             cache[k] = a[i];
             vis[i] = true;
-            solve(k+1);
+            solve(k+1, a[i]);
             vis[i] = false;
         }
     }
@@ -32,6 +32,6 @@ int main() {
     for (int i = 0; i < n; i++) cin >> a[i];
     sort(a, a+n);
 
-    solve(0);
+    solve(0, 0);
     return 0;
 }
