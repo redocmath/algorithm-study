@@ -114,15 +114,6 @@ int main() {
         }
     }
     solve();
-//    for (int i = 0; i < r; i++) {
-//        for (int j = 0; j < c; j++) cout << dist_w[i][j] << " ";
-//        cout << "\n";
-//    }
-//    for (int i = 0; i < r; i++) {
-//        for (int j = 0; j < c; j++) cout << dist_s[i][j] << " ";
-//        cout << "\n";
-//    }
-
     if (dist_a[cave.first][cave.second] == -1) cout << "KAKTUS";
     else cout << dist_a[cave.first][cave.second]; 
     return 0;
