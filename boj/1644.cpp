@@ -1,10 +1,10 @@
 #include <bits/stdc++.h>
-#pragma gcc optimize("O3")
-#pragma gcc optimize("Ofast") 
+#pragma gcc optimize("o3")
+#pragma gcc optimize("ofast") 
 #pragma gcc optimize("unroll-loops")
 typedef long long ll;
 using namespace std;
-typedef pair<int, int> P;
+typedef pair<int, int> p;
 
 int n;
 bool sieve[4000001];
