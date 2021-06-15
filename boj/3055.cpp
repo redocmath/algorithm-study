@@ -1,120 +1,81 @@
 #include <bits/stdc++.h>
+#define EMPTY 0
+#define D 1
+#define S 2
+#define X 3
+#define WATER 4
+#pragma gcc optimize("O3")
+#pragma gcc optimize("Ofast") 
+#pragma gcc optimize("unroll-loops")
 typedef long long ll;
 using namespace std;
 typedef pair<int, int> P;
+typedef vector<int> V;
 
-int r, c; // ver, hor
+int dh[] = {1, 0, -1, 0};
+int dv[] = {0, 1, 0, -1};
+
+int r, c;
 int board[50][50];
-int dist_w[50][50];
-int dist_s[50][50];
-bool available[50][50];
-int dist_a[50][50];
-
-int dx[] = {0, 1, 0, -1};
-int dy[] = {1, 0, -1, 0};
-
-vector<P> waterpos;
-P cave, poss;
+int vis[50][50];
+int vis_h[50][50];
+queue<P> hedgepos;
+queue<P> waterpos;
 
 void solve() {
-    // bfs 1: water
-    queue<P> Q;
-    for (int i = 0; i < waterpos.size(); i++) {
-        P water = waterpos[i];
-        dist_w[water.first][water.second] = 0;
-        Q.push(P(water.first, water.second));
-    }
-
-    while(!Q.empty()) {
-        P cur = Q.front(); Q.pop();
+    P cur;
+    while (!waterpos.empty()) {
+        cur = waterpos.front(); waterpos.pop();
         for (int i = 0; i < 4; i++) {
-            int nver = cur.first + dy[i];
-            int nhor = cur.second + dx[i];
-
-            if (nver < 0 || nver >= r || nhor < 0 || nhor >= c) continue;
-            if (board[nver][nhor] == 1 || board[nver][nhor] == 2) continue;
-            if (dist_w[nver][nhor] >= 0) continue;
-
-            dist_w[nver][nhor] = dist_w[cur.first][cur.second]+1;
-            Q.push({nver, nhor});
+            int nv = cur.first + dv[i];
+            int nh = cur.second + dh[i];
+            if (nv < 0 || nv >= r || nh < 0 || nh >= c) continue;
+            if (vis[nv][nh] != -1 || board[nv][nh] != EMPTY) continue;
+            vis[nv][nh] = vis[cur.first][cur.second]+1;
+            waterpos.push(P(nv, nh));
         }
     }
 
-    queue<P> QQ;
-    dist_s[poss.first][poss.second] = 0;
-    QQ.push(P(poss.first, poss.second));
-    while(!QQ.empty()) {
-        P cur = QQ.front(); QQ.pop();
+    int ret = -1;
+    while (!hedgepos.empty()) {
+        cur = hedgepos.front(); hedgepos.pop();
         for (int i = 0; i < 4; i++) {
-            int nver = cur.first + dy[i];
-            int nhor = cur.second + dx[i];
-
-            if (nver < 0 || nver >= r || nhor < 0 || nhor >= c) continue;
-            if (board[nver][nhor] == 1) continue;
-            if (dist_s[nver][nhor] >= 0) continue;
-
-            dist_s[nver][nhor] = dist_s[cur.first][cur.second]+1;
-            QQ.push({nver, nhor});
+            int nv = cur.first + dv[i];
+            int nh = cur.second + dh[i];
+            if (nv < 0 || nv >= r || nh < 0 || nh >= c) continue;
+            if (board[nv][nh] == D) {ret = vis_h[cur.first][cur.second]+1; cout << ret; return;}
+            if (vis_h[nv][nh] != -1 || vis[nv][nh] <= vis_h[cur.first][cur.second]+1 || board[nv][nh] != EMPTY) continue;
+            vis_h[nv][nh] = vis_h[cur.first][cur.second]+1;
+            hedgepos.push(P(nv, nh));
         }
     }
-    for (int i = 0; i < r; i++) {
-        for (int j = 0; j < c; j++) {
-            if (dist_s[i][j] < dist_w[i][j]) available[i][j] = true;
-            else available[i][j] = false;
-        }
-    }
-
-    available[cave.first][cave.second] = true;
-
-    queue<P> FQ;
-    dist_a[poss.first][poss.second] = 0;
-    FQ.push(P(poss.first, poss.second));
-    while(!FQ.empty()) {
-        P cur = FQ.front(); FQ.pop();
-        for (int i = 0; i < 4; i++) {
-            int nver = cur.first + dy[i];
-            int nhor = cur.second + dx[i];
-
-            if (nver < 0 || nver >= r || nhor < 0 || nhor >= c) continue;
-            if (!available[nver][nhor]) continue;
-            if (dist_a[nver][nhor] >= 0) continue;
-
-            dist_a[nver][nhor] = dist_a[cur.first][cur.second]+1;
-            FQ.push({nver, nhor});
-        }
-    }
+    cout << "KAKTUS";
 }
 
 int main() {
-    for (int i = 0; i < 50; i++) {
-        fill(dist_a[i], dist_a[i]+50, -1);
-        fill(dist_w[i], dist_w[i]+50, -1);
-        fill(dist_s[i], dist_s[i]+50, -1);
-    }
+    for (int i = 0; i < 50; i++) fill(vis[i], vis[i]+50, -1);
+    for (int i = 0; i < 50; i++) fill(vis_h[i], vis_h[i]+50, -1);
     ios::sync_with_stdio(false);
     cin.tie(0); cout.tie(0);
     cin >> r >> c;
     for (int i = 0; i < r; i++) {
         string s; cin >> s;
         for (int j = 0; j < c; j++) {
-            if (s[j] == '.') board[i][j] = 0;
-            if (s[j] == 'X') board[i][j] = 1;
-            if (s[j] == 'D') {
-                cave = P(i, j);
-                board[i][j] = 2;
-            }
+            if (s[j] == '.') board[i][j] = EMPTY;
+            if (s[j] == 'D') board[i][j] = D;
             if (s[j] == 'S') {
-                poss = P(i, j);
-                board[i][j] = 3;
+                board[i][j] = S;
+                hedgepos.push(P(i, j));
+                vis_h[i][j] = 0;
             }
+            if (s[j] == 'X') board[i][j] = X;
             if (s[j] == '*') {
-                board[i][j] = 4;
-                waterpos.push_back(P(i, j));
+                board[i][j] = WATER;
+                waterpos.push(P(i, j));
+                vis[i][j] = 0;
             }
         }
     }
     solve();
-    if (dist_a[cave.first][cave.second] == -1) cout << "KAKTUS";
-    else cout << dist_a[cave.first][cave.second]; 
     return 0;
 }
