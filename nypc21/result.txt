@@ -1,0 +1,7 @@
+Total Point: 675.1 / 1500
+Point Ratio: 45%
+
+Day 1: 485
+Day 2: 129
+Day 3: 61.1
+Day 4: 0
