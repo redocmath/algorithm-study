@@ -25,7 +25,7 @@ void solve() {
     for (int i = 0; i < n; i++) {
         if (sequ[i]) continue;
         for (int j = 1; j <= 5; j++)
-            if (j != ans[i] && (!i || sequ[i-1] != j)) {
+            if (j != ans[i] && (!i || sequ[i-1] != j) && (i == n-1 || sequ[i+1] != j)) {
                 sequ[i] = j; break;
             }
     }
