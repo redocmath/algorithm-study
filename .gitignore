@@ -1,3 +1,6 @@
 *.DS_Store
 *.dsYM
 *.out
+*.json
+test.cpp
+boj/9764.cpp
