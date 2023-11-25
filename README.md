@@ -1,4 +1,4 @@
-# Problem-Solving Note :notebook_with_decorative_cover:
+### Algorithm Study Note :notebook_with_decorative_cover:
 
 ```c++
 #include <idea>
@@ -8,9 +8,10 @@
 using namespace ByRedoC;
 
 int main() {
-    // You can see my codes but are not allowed to copy them.
-    // Please give me a Star if you got help!
+    // This work is licensed under CC BY-NC-ND 4.0 
+    // ⭐ if you liked it.
 }
 ```
-### Here is my code used to solve problems on [Backjoon Online Judge](https://www.acmicpc.net).
-### All contributions welcome. :smile:
+
+Here are my codes used to solve problems on OJs.
+<p xmlns:cc="http://creativecommons.org/ns#" >This work is licensed under <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1"></a></p>
