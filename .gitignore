@@ -2,5 +2,6 @@
 *.dsYM
 *.out
 *.json
+*.vscode
 test.cpp
 boj/9764.cpp

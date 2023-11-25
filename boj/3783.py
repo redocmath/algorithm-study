@@ -1,11 +1,11 @@
 from decimal import *
 
-getcontext().rounding = ROUND_HALF_DOWN
 getcontext().prec = 1000
 
 t = int(input())
 for i in range(t):
-    n = Decimal(input())
-    n = n ** (Decimal('1.0') / Decimal('3.0'))
-    a = str(round(n, 100))
-    print(a[:list(a).index('.')+11])
+    n = Decimal(input().rstrip() + ".0000000000")
+    n = Decimal(n ** (Decimal('1.0') / Decimal('3.0')))
+    n = round(n, 500)
+    n = n.quantize(Decimal("0.0000000001"), rounding=ROUND_DOWN)
+    print(n)
